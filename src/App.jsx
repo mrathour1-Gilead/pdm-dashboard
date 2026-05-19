@@ -378,6 +378,8 @@ export default function App() {
     <a
       key={dashboard.name}
       href={dashboard.url}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`group flex items-center gap-3 text-base font-medium text-slate-700 transition hover:text-teal-700 ${extraClass}`}
     >
       <span className="text-teal-600 transition-transform duration-200 group-hover:translate-x-1">
