@@ -398,6 +398,7 @@ export default function App() {
         <img
           src={header}
           alt="Supply Chain"
+          loading="lazy"
           className="absolute inset-0 h-full w-full object-cover opacity-20"
         />
 
@@ -418,6 +419,7 @@ export default function App() {
               <img
                 src={abhishek}
                 alt="Abhishek Gupta"
+                loading="lazy"
                 className="h-16 w-16 rounded-full border-2 border-white/20 object-cover"
               />
 
@@ -455,6 +457,7 @@ export default function App() {
                   <img
                     src={section.image}
                     alt={section.title}
+                    loading="lazy"
                     className={`w-full object-cover ${
                       section.title === "CSCM"
                         ? "h-[240px]"
