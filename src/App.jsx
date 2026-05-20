@@ -1,3 +1,4 @@
+import React from "react";
 import bms from "./assets/images/bms.png";
 import cares_act from "./assets/images/cares_act.png";
 import cscm from "./assets/images/cscm.png";
@@ -15,7 +16,7 @@ import supply_res from "./assets/images/supply_res.png";
 import abhishek from "./assets/images/abhishek.jpg";
 
 export default function App() {
-  const sections = [
+const sections = [
     {
       title: "Raw Material Forecasting",
       image: raw_material,
@@ -374,61 +375,68 @@ export default function App() {
     },
   ];
 
-  const renderLink = (dashboard, extraClass = "") => (
+
+ const renderLink = (dashboard) => (
     <a
-      key={dashboard.name}
+      key={dashboard.url + dashboard.name}
       href={dashboard.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group flex items-center gap-3 text-base font-medium text-slate-700 transition hover:text-teal-700 ${extraClass}`}
+      className="group flex items-start gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 p-3 text-[14px] font-medium text-slate-700 transition-all duration-200 hover:border-teal-300 hover:bg-teal-50 hover:text-teal-900"
     >
-      <span className="text-teal-600 transition-transform duration-200 group-hover:translate-x-1">
+      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-[11px] text-slate-400 transition-all duration-200 group-hover:border-teal-600 group-hover:bg-teal-600 group-hover:text-white">
         ↗
       </span>
 
-      <span className="border-b border-transparent transition-all duration-200 group-hover:border-teal-600">
-        {dashboard.name}
-      </span>
+      <span className="leading-tight">{dashboard.name}</span>
     </a>
   );
 
   return (
-    <div className="min-h-screen bg-[#f6f8fb] text-slate-800">
-      <header className="relative overflow-hidden bg-[#0f172a]">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.05),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.04),transparent_30%),linear-gradient(to_bottom_right,#f8fafc,#eef2f7)] text-slate-800 antialiased font-sans">
+      {/* Header */}
+      <header className="relative overflow-hidden border-b border-slate-800 bg-slate-900 shadow-md">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.15),transparent_50%)]" />
+
         <img
           src={header}
-          alt="Supply Chain"
+          alt="Banner Cover"
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-20"
+          className="absolute inset-0 h-full w-full object-cover opacity-10 mix-blend-overlay"
         />
 
-        <div className="relative mx-auto max-w-[1700px] px-6 py-8 lg:px-10 lg:py-10">
+        <div className="relative mx-auto max-w-[1920px] px-2 py-14 lg:px-3">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-4xl flex-1">
-              <h1 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">
+            <div className="max-w-4xl">
+              <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
                 PDM Supply Chain Analytics
               </h1>
 
-              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-200">
-                Centralized dashboard portal for forecasting, logistics,
-                inventory visibility, transportation, and operational analytics.
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-400">
+                Unified enterprise portal providing secure, direct access to
+                data systems spanning corporate forecasting, international
+                logistics, itemized inventory, and distribution analytics.
               </p>
             </div>
 
-            <div className="flex w-fit items-center gap-4 rounded-xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur">
-              <img
-                src={abhishek}
-                alt="Abhishek Gupta"
-                loading="lazy"
-                className="h-16 w-16 rounded-full border-2 border-white/20 object-cover"
-              />
+            {/* Profile */}
+            <div className="flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 shadow-xl backdrop-blur-md">
+              <div className="relative">
+                <img
+                  src={abhishek}
+                  alt="Abhishek Gupta"
+                  className="h-14 w-14 rounded-full border-2 border-teal-500/30 object-cover shadow-inner"
+                />
+
+                <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-slate-900 bg-emerald-500" />
+              </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-white">
+                <h3 className="text-base font-bold tracking-wide text-white">
                   Abhishek Gupta
                 </h3>
 
-                <p className="text-sm text-slate-300">
+                <p className="text-xs font-medium text-slate-400">
                   Director, IT Data Engineering
                 </p>
               </div>
@@ -437,79 +445,87 @@ export default function App() {
         </div>
       </header>
 
-      <main className="mx-auto grid max-w-[1700px] gap-6 px-6 py-8 md:grid-cols-2 lg:px-10 lg:py-10">
-        {sections.map((section) => (
-          <section
-            key={section.title}
-            className={`overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 ${
-              section.title === "CSCM" ? "md:col-span-2" : ""
-            }`}
-          >
-            <div
-              className={
-                section.title !== "CSCM"
-                  ? "grid items-center gap-6 lg:grid-cols-[260px_1fr]"
-                  : ""
-              }
+      {/* Dashboard Cards */}
+      <main className="mx-auto grid max-w-[1920px] gap-8 px-2 py-10 md:grid-cols-2 lg:px-3">
+        {sections.map((section) => {
+          const isCscm = section.title === "CSCM";
+
+          return (
+            <section
+              key={section.title}
+              className={`flex flex-col overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/40 shadow-sm transition-all duration-300 hover:shadow-lg ${
+                isCscm ? "md:col-span-2" : ""
+              }`}
             >
-              <div className={section.title !== "CSCM" ? "p-4" : ""}>
-                <div className="overflow-hidden rounded-xl">
-                  <img
-                    src={section.image}
-                    alt={section.title}
-                    loading="lazy"
-                    className={`w-full object-cover ${
-                      section.title === "CSCM"
-                        ? "h-[240px]"
-                        : "h-[180px] object-center"
-                    }`}
-                  />
+              <div
+                className={`grid flex-1 ${
+                  isCscm
+                    ? "lg:grid-cols-[300px_1fr]"
+                    : "lg:grid-cols-[240px_1fr]"
+                }`}
+              >
+                {/* Image */}
+                <div className="flex items-center justify-center border-b border-slate-100 bg-gradient-to-br from-slate-50 to-slate-100 p-4 lg:border-r lg:border-b-0">
+                  <div className="h-full w-full overflow-hidden rounded-2xl border border-slate-200/60 shadow-xs">
+                    <img
+                      src={section.image}
+                      alt={section.title}
+                      loading="lazy"
+                      className={`w-full object-cover transition-all duration-500 ${
+                        isCscm ? "h-[220px] lg:h-full" : "h-[160px] lg:h-full"
+                      }`}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-5">
-                <h2 className="text-2xl font-bold text-slate-900">
-                  {section.title}
-                </h2>
+                {/* Content */}
+                <div className="flex flex-col justify-between p-6">
+                  <div>
+                    <h2 className="text-[22px] font-bold tracking-tight text-slate-900">
+                      {section.title}
+                    </h2>
 
-                <div className="mt-3 h-1 w-20 rounded-full bg-teal-500" />
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                      {section.description}
+                    </p>
+                  </div>
 
-                <p className="mt-4 max-w-3xl text-[15px] leading-6 text-slate-600">
-                  {section.description}
-                </p>
+                  {/* Links */}
+                  <div className="mt-6 border-t border-slate-100 pt-5">
+                    {isCscm ? (
+                      <div className="space-y-6">
+                        {section.children.map((group) => (
+                          <div key={group.title}>
+                            <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+                              {group.title}
+                            </h4>
 
-                <div className="mt-5 space-y-3">
-                  {section.title === "CSCM" ? (
-                    <div className="space-y-6">
-                      {section.children.map((group) => (
-                        <div key={group.title}>
-                          <h3 className="mb-3 text-lg font-semibold text-slate-900">
-                            {group.title}
-                          </h3>
-
-                          <div className="grid gap-3 sm:grid-cols-2">
-                            {group.links.map((link) =>
-                              renderLink(link, "py-1"),
-                            )}
+                            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                              {group.links.map((link) =>
+                                renderLink(link)
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    (section.title === "SCV Global"
-                      ? section.dashboards.slice(0, 5)
-                      : section.dashboards
-                    ).map((dashboard) => renderLink(dashboard))
-                  )}
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {section.dashboards.map((dashboard) =>
+                          renderLink(dashboard)
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          );
+        })}
       </main>
 
-      <footer className="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-        Internal Analytics Portal • PDM Supply Chain Analytics
+      {/* Footer */}
+      <footer className="border-t border-slate-200/80 bg-white/80 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 backdrop-blur-sm">
+        Internal Data Engine Portal • PDM Supply Chain Analytics
       </footer>
     </div>
   );
