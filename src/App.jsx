@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import bms from "./assets/images/bms.png";
 import cares_act from "./assets/images/cares_act.png";
 import cscm from "./assets/images/cscm.png";
@@ -19,6 +19,7 @@ const SECTIONS_DATA = [
   {
     title: "Raw Material Forecasting",
     image: raw_material,
+    type: "Tableau",
     description: "Raw Material Forecasting dashboard to track inventory levels, supplier performance, procurement costs, and demand forecasting.",
     groups: [
       {
@@ -37,6 +38,7 @@ const SECTIONS_DATA = [
   {
     title: "BMS",
     image: bms,
+    type: "Tableau",
     description: "Bulk Management Services refer to the procurement, handling, storage, and distribution of large quantities and medical supplies required for drug manufacturing.",
     groups: [
       {
@@ -57,6 +59,7 @@ const SECTIONS_DATA = [
   {
     title: "Demand Planning",
     image: demand_planning,
+    type: "Tableau",
     description: "Demand Planning in clinical research involves analyzing historical data, understanding patient recruitment trends, and considering external factors that may impact the demand for study materials.",
     groups: [
       {
@@ -75,6 +78,7 @@ const SECTIONS_DATA = [
   {
     title: "SCV Global",
     image: scv,
+    type: "Tableau",
     description: "SCV Global showing stock levels, stock value levels, stock value lead time, turnover rates and backorder rates and inventory distribution.",
     groups: [
       {
@@ -96,6 +100,7 @@ const SECTIONS_DATA = [
   {
     title: "CSCM",
     image: cscm,
+    type: "Tableau",
     description: "Clinical Supply Chain Management is the process of distributing raw materials to pharmaceutical companies and then delivering final products to patients across the world.",
     isWide: true,
     groups: [
@@ -150,6 +155,7 @@ const SECTIONS_DATA = [
   {
     title: "Supply Chain Analytics",
     image: supply_chain,
+    type: "QuickSight",
     description: "Supply chain Analytics in clinical settings can be applied to improve forecasting, planning, and performance to track logistics, optimize operations, and make data driven decisions.",
     groups: [
       {
@@ -161,6 +167,7 @@ const SECTIONS_DATA = [
   {
     title: "Cycle Time Report",
     image: cycle_time,
+    type: "QuickSight",
     description: "The Cycle Time Report dashboard allows you to measure cycle times for selected intervals and compare them against various attributes and metrics to analyze efficiency and identify bottlenecks.",
     groups: [
       {
@@ -172,6 +179,7 @@ const SECTIONS_DATA = [
   {
     title: "SEIP",
     image: seip,
+    type: "Web App",
     description: "Single Echelon Inventory Planning is designed to meet functional requirements while accounting for fluctuating customer demand, forecast inaccuracies, and variability in lead times.",
     groups: [
       {
@@ -183,17 +191,19 @@ const SECTIONS_DATA = [
   {
     title: "Supply Chain Resilience",
     image: supply_res,
+    type: "QuickSight",
     description: "Supply Chain Resilience refers to the ability of a supply chain or organization to withstand disruptions, adapt quickly to unexpected challenges, and continue delivering critical products and services.",
     groups: [
       {
         title: "Dashboards",
-        links: [{ name: "Supply Chain Resilience", url: "https://us-west-2.quicksight.aws.amazon.com/sn/account/gilead-dev/dashboards/3b23796b-15b8-45e0-b3b8-f9653f28c9f3/sheets/3b23796b-15b8-45e0-b3b8-f9653f28c9f3_291de253-169e-477a-859a-dddc28e2af10?state=QUFBQURtdGxlUzB4TlRZNE9UVTFOekkyS0dmUGlIUWVMWEJWRVpJQVRlXzNPZEQ5YS0xOWlFMzk1cS1XRXV4ZWlPaUZrSHdpYVQ2VFNNemlZSXlMZDN6b0lYQ0tMOWFpSXF1WEJ4cTYzUEtnZHVKY3MwM2ZmYmkzeWV4MzlUSU9NZjBWUk0xUmRBRXh0SzhKMD62TmZydk9KcjBZTnRXUHNzQzNrOTJQeS1yQ1BfMjU2Nm1rSlYzSTZ1N1dnYzRRbDBHZ3VyRXBVQzZvYkpJSXFpSEx3NFdZMGt5Y19VbjJOOWJ0b01lVXZwSDF0YndVZTZ4RXowVmVfdEg4" }]
+        links: [{ name: "Supply Chain Resilience", url: "https://us-west-2.quicksight.aws.amazon.com/sn/account/gilead-dev/dashboards/3b23796b-15b8-45e0-b3b8-f9653f28c9f3/sheets/3b23796b-15b8-45e0-b3b8-f9653f28c9f3_291de253-169e-477a-859a-dddc28e2af10?state=QUFBQURtdGxlUzB4TlRZNE9UVTFOekkyS0dmUGlIUWVMWEJWRVpJQVRlXzNPZEQ5YS0xOWlFMzk1cS1XRXV4ZWlPaUZrSHdpYVQ2VFNNemlZSXlMZDN6b0lYQ0tMOWFpSXF1WEJ4cTYzUEtnZHVKY3MwM2ZmYmkzeWV4MzlUSU9NZjBWUk0xUmRBRXh0SzhKMD62TmZydk9KcjBZTnRXUHNzQzNrOTJQeS1yQ1BfMjU2Nm1rSlYzSTZ1N1dnYzRRbDBHZ3VyRXBVQzZvYkpJSXFpSEx3NFdZMGt5Y1_VbnJOOWJ0b01lVXZwSDF0YndVZTZ4RXowVmVfdEg4" }]
       }
     ]
   },
   {
     title: "CMO Inventory Reconciliation",
     image: inventory,
+    type: "QuickSight",
     description: "A Contract Manufacturing Organization provides pharmaceutical manufacturing services on behalf of another company ensuring scalability, compliance, and timely delivery.",
     groups: [
       {
@@ -205,6 +215,7 @@ const SECTIONS_DATA = [
   {
     title: "CARES Act",
     image: cares_act,
+    type: "QuickSight",
     description: "The CARES Act project focuses on supporting businesses, healthcare providers, and individuals through relief funding, regulatory flexibility, and reporting compliance.",
     groups: [
       {
@@ -216,6 +227,7 @@ const SECTIONS_DATA = [
   {
     title: "Root Cause Analysis (RCA)",
     image: rca,
+    type: "Web App",
     description: "The RCA App is a centralized tool for capturing and analyzing issues across processes. It enables users to record incidents, investigate causes, assign corrective actions, and track progress.",
     groups: [
       {
@@ -227,6 +239,7 @@ const SECTIONS_DATA = [
   {
     title: "GTMS",
     image: gtms,
+    type: "Web App",
     description: "Gilead Transportation Management System refers to the management, control, and optimization of all transportation processes along the supply chain.",
     groups: [
       {
@@ -237,15 +250,43 @@ const SECTIONS_DATA = [
   }
 ];
 
+function HighlightText({ text, query }) {
+  if (!query.trim()) return <span>{text}</span>;
+  const regex = new RegExp(`(${query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, "gi");
+  const parts = text.split(regex);
+  return (
+    <span>
+      {parts.map((part, i) => 
+        regex.test(part) ? (
+          <mark key={i} className="bg-teal-100 text-teal-950 rounded-xs px-0.5 font-bold mix-blend-multiply">
+            {part}
+          </mark>
+        ) : (
+          part
+        )
+      )}
+    </span>
+  );
+}
+
 export default function App() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  // Debounce query handling to optimize computation weight
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(inputValue);
+    }, 200); // 200ms delay window
+
+    return () => clearTimeout(handler);
+  }, [inputValue]);
 
   const filteredSections = useMemo(() => {
-    if (!searchQuery.trim()) return SECTIONS_DATA;
-    const query = searchQuery.toLowerCase();
+    if (!debouncedQuery.trim()) return SECTIONS_DATA;
+    const query = debouncedQuery.toLowerCase();
     
     return SECTIONS_DATA.map(section => {
-      // Filter the dashboard groups inside each section to match link name
       const matchedGroups = section.groups.map(group => {
         const filteredLinks = group.links.filter(link => 
           link.name.toLowerCase().includes(query)
@@ -253,7 +294,6 @@ export default function App() {
         return { ...group, links: filteredLinks };
       }).filter(group => group.links.length > 0);
 
-      // Include section if name, description, or any child links match the string query
       if (
         section.title.toLowerCase().includes(query) ||
         section.description.toLowerCase().includes(query) ||
@@ -266,14 +306,21 @@ export default function App() {
       }
       return null;
     }).filter(Boolean);
-  }, [searchQuery]);
+  }, [debouncedQuery]);
+
+  const totalDashboardsCount = useMemo(() => {
+    return SECTIONS_DATA.reduce((acc, s) => acc + s.groups.reduce((gAcc, g) => gAcc + g.links.length, 0), 0);
+  }, []);
+
+  const currentResultCount = useMemo(() => {
+    return filteredSections.reduce((acc, s) => acc + s.groups.reduce((gAcc, g) => gAcc + g.links.length, 0), 0);
+  }, [filteredSections]);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.05),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.04),transparent_30%),linear-gradient(to_bottom_right,#f8fafc,#eef2f7)] text-slate-800 antialiased font-sans">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.06),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.05),transparent_35%),linear-gradient(to_bottom_right,#f8fafc,#edf2f7)] text-slate-800 antialiased font-sans">
       
-      {/* Structural Header Block */}
-      <header className="relative overflow-hidden border-b border-slate-800 bg-slate-900 shadow-md">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.15),transparent_50%)]" />
+      <header className="relative overflow-hidden border-b border-slate-950 bg-slate-900 shadow-lg">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.18),transparent_50%)]" />
         <img
           src={header}
           alt="Banner Cover"
@@ -281,88 +328,102 @@ export default function App() {
           className="absolute inset-0 h-full w-full object-cover opacity-10 mix-blend-overlay"
         />
 
-        <div className="relative mx-auto max-w-[1920px] px-4 py-12 lg:px-6">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="relative mx-auto max-w-[1920px] px-4 py-12 lg:px-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-4xl">
-              <h1 className="text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
+              <h1 className="text-4xl font-black tracking-tight text-white lg:text-5xl bg-gradient-to-r from-white via-white to-slate-300 bg-clip-text">
                 PDM Supply Chain Analytics
               </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
+              <p className="mt-3 max-w-2xl text-sm font-medium leading-relaxed text-slate-400">
                 Unified enterprise portal providing secure, direct access to data systems spanning corporate forecasting, international logistics, itemized inventory, and distribution analytics.
               </p>
               
-              {/* Dynamic Input bar filter */}
               <div className="mt-6 max-w-md">
-                <div className="relative rounded-xl shadow-sm">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 pointer-events-none text-base">
+                <div className="relative rounded-xl shadow-md">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 text-lg">
                     ⌕
                   </span>
                   <input
                     type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Search systems or report names..."
-                    className="block w-full rounded-xl border-0 bg-white/10 py-2.5 pl-9 pr-4 text-white placeholder-slate-400 ring-1 ring-inset ring-white/10 focus:bg-white focus:text-slate-900 focus:placeholder-slate-400 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm transition-all duration-200"
+                    className="block w-full rounded-xl border-0 bg-white/10 py-3 pl-10 pr-4 text-white placeholder-slate-400 ring-1 ring-inset ring-white/10 focus:bg-white focus:text-slate-900 focus:placeholder-slate-400 focus:outline-none sm:text-sm transition-all duration-300 backdrop-blur-xs"
                   />
                 </div>
+                <p className="mt-2 text-xs font-semibold text-slate-500 tracking-wide pl-1">
+                  {inputValue.trim() ? (
+                    <span>Found {currentResultCount} matching views across {filteredSections.length} sections</span>
+                  ) : (
+                    <span>Displaying all {totalDashboardsCount} analytical views</span>
+                  )}
+                </p>
               </div>
             </div>
 
-            {/* Profile Block */}
-            <div className="flex w-fit items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 shadow-xl backdrop-blur-md">
+            <div className="flex w-fit items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-2xl backdrop-blur-lg ring-1 ring-white/5">
               <div className="relative">
                 <img
                   src={abhishek}
                   alt="Abhishek Gupta"
                   loading="lazy"
-                  className="h-14 w-14 rounded-full border-2 border-teal-500/30 object-cover shadow-inner"
+                  className="h-14 w-14 rounded-full border-2 border-teal-400/40 object-cover shadow-inner"
                 />
-                <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-slate-900 bg-emerald-500" />
+                <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-slate-900 bg-emerald-500 shadow-xs" />
               </div>
               <div>
                 <h3 className="text-base font-bold tracking-wide text-white">Abhishek Gupta</h3>
-                <p className="text-xs font-medium text-slate-400">Director, IT Data Engineering</p>
+                <p className="text-xs font-semibold text-teal-400/90 tracking-wider uppercase">Director, IT Data Engineering</p>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Grid Workspace */}
-      <main className="mx-auto max-w-[1920px] px-4 py-8 lg:px-6">
+      <main className="mx-auto max-w-[1920px] px-4 py-10 lg:px-8">
         <div className="grid gap-8 md:grid-cols-2">
           {filteredSections.length > 0 ? (
             filteredSections.map((section) => (
               <section
                 key={section.title}
-                className={`flex flex-col overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/40 shadow-sm transition-all duration-300 hover:shadow-lg ${
+                className={`flex flex-col overflow-hidden rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/50 shadow-xs transition-all duration-300 hover:shadow-md hover:border-slate-300 ${
                   section.isWide ? "md:col-span-2" : ""
                 }`}
               >
-                <div className={`grid flex-1 ${section.isWide ? "lg:grid-cols-[300px_1fr]" : "lg:grid-cols-[240px_1fr]"}`}>
+                <div className={`grid flex-1 ${section.isWide ? "lg:grid-cols-[280px_1fr]" : "lg:grid-cols-[220px_1fr]"}`}>
                   
-                  {/* Aspect Locked Thumbnail Container Area */}
-                  <div className="flex items-center justify-center border-b border-slate-100 bg-gradient-to-br from-slate-50 to-slate-100 p-4 lg:border-r lg:border-b-0">
-                    <div className="h-full w-full overflow-hidden rounded-2xl border border-slate-200/60 shadow-xs">
+                  <div className="flex items-center justify-center border-b border-slate-100 bg-gradient-to-br from-slate-50/60 to-slate-100/60 p-4 lg:border-r lg:border-b-0">
+                    <div className="h-full w-full overflow-hidden rounded-2xl border border-slate-200/50 bg-white shadow-xs">
                       <img
                         src={section.image}
                         alt={section.title}
                         loading="lazy"
-                        className={`w-full object-cover transition-all duration-500 ${
-                          section.isWide ? "h-[220px] lg:h-full" : "h-[160px] lg:h-full"
+                        className={`w-full object-cover ${
+                          section.isWide ? "h-[200px] lg:h-full" : "h-[160px] lg:h-full"
                         }`}
                       />
                     </div>
                   </div>
 
-                  {/* Descriptions block content elements */}
-                  <div className="flex flex-col justify-between p-6">
+                  <div className="flex flex-col justify-between p-6 lg:p-7">
                     <div>
-                      <h2 className="text-[22px] font-bold tracking-tight text-slate-900">{section.title}</h2>
-                      <p className="mt-3 text-sm leading-relaxed text-slate-600">{section.description}</p>
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+                          <HighlightText text={section.title} query={debouncedQuery} />
+                        </h2>
+                        <span className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-bold uppercase tracking-wider ${
+                          section.type === "Tableau" ? "bg-blue-50 text-blue-700 ring-1 ring-blue-700/10" :
+                          section.type === "QuickSight" ? "bg-amber-50 text-amber-800 ring-1 ring-amber-600/10" :
+                          "bg-purple-50 text-purple-700 ring-1 ring-purple-700/10"
+                        }`}>
+                          {section.type}
+                        </span>
+                      </div>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600 font-medium">
+                        <HighlightText text={section.description} query={debouncedQuery} />
+                      </p>
                     </div>
 
-                    {/* Anchors Stack Collection */}
                     <div className="mt-6 border-t border-slate-100 pt-5 space-y-6">
                       {section.groups.map((group) => {
                         const showHeader = section.isWide || group.title !== "Dashboards";
@@ -370,7 +431,7 @@ export default function App() {
                         return (
                           <div key={group.title}>
                             {showHeader && (
-                              <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+                              <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
                                 {group.title}
                               </h4>
                             )}
@@ -381,12 +442,14 @@ export default function App() {
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="group/link flex items-start gap-2.5 rounded-xl border border-slate-200/70 bg-white/90 p-3.5 transition-all duration-200 hover:border-teal-300 hover:bg-teal-50/40 hover:shadow-xs text-[14px] font-semibold text-slate-700 hover:text-teal-950"
+                                  className="group/link flex items-start gap-3 rounded-xl border border-slate-200/80 bg-white p-3.5 transition-all duration-200 hover:border-teal-400 hover:bg-gradient-to-br hover:from-white hover:to-teal-50/20 hover:shadow-xs text-[14px] font-semibold text-slate-700 hover:text-slate-950 focus:outline-none"
                                 >
-                                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-[11px] text-slate-400 transition-all duration-200 group-hover/link:border-teal-600 group-hover/link:bg-teal-600 group-hover/link:text-white">
+                                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-slate-50 text-[10px] text-slate-400 font-bold transition-all duration-200 group-hover/link:border-teal-600 group-hover/link:bg-teal-600 group-hover/link:text-white">
                                     ↗
                                   </span>
-                                  <span className="leading-tight">{link.name}</span>
+                                  <span className="leading-tight">
+                                    <HighlightText text={link.name} query={debouncedQuery} />
+                                  </span>
                                 </a>
                               ))}
                             </div>
@@ -400,14 +463,16 @@ export default function App() {
               </section>
             ))
           ) : (
-            <div className="col-span-full py-16 text-center bg-white/50 rounded-3xl border border-dashed border-slate-300">
-              <p className="text-base text-slate-500 font-medium">No dashboards found matching your search term.</p>
+            <div className="col-span-full py-20 text-center bg-white/40 rounded-3xl border-2 border-dashed border-slate-300 max-w-xl mx-auto w-full px-4">
+              <span className="text-3xl block mb-3 opacity-60">📋</span>
+              <p className="text-base text-slate-500 font-semibold">No active dashboards found matching your search term.</p>
+              <p className="text-xs text-slate-400 mt-1">Try checking your spelling or typing a broader keyword context.</p>
             </div>
           )}
         </div>
       </main>
 
-      <footer className="border-t border-slate-200/80 bg-white/80 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 backdrop-blur-sm">
+      <footer className="border-t border-slate-200 bg-white/80 py-5 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-slate-400 backdrop-blur-md">
         Internal Data Engine Portal • PDM Supply Chain Analytics
       </footer>
     </div>
