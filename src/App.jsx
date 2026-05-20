@@ -536,7 +536,7 @@ export default function App() {
           className="absolute inset-0 h-full w-full object-cover opacity-10 mix-blend-overlay"
         />
 
-        <div className="relative mx-auto max-w-[1920px] px-4 py-12 lg:px-8">
+        <div className="relative mx-auto max-w-[1920px] px-4 py-8 lg:px-8">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-4xl">
               <h1 className="text-4xl font-black tracking-tight text-white lg:text-5xl bg-gradient-to-r from-white via-white to-slate-300 bg-clip-text">
@@ -675,7 +675,7 @@ export default function App() {
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="group/link flex items-start justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-3.5 transition-all duration-200 hover:border-teal-400 hover:bg-gradient-to-br hover:from-white hover:to-teal-50/20 hover:shadow-xs text-[14px] font-semibold text-slate-700 focus:outline-none"
+                                  className="group/link flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-3.5 transition-all duration-200 hover:border-teal-400 hover:bg-gradient-to-br hover:from-white hover:to-teal-50/20 hover:shadow-xs text-[14px] font-semibold text-slate-700 focus:outline-none"
                                 >
                                   {/* Combined truncate safety with the group hover text color effect */}
                                   <span className="leading-tight  min-w-0 transition-colors duration-200 group-hover/link:text-teal-600">
