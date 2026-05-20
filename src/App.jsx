@@ -471,10 +471,6 @@ export default function App() {
           )}
         </div>
       </main>
-
-      <footer className="border-t border-slate-200 bg-white/80 py-5 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-slate-400 backdrop-blur-md">
-        Internal Data Engine Portal • PDM Supply Chain Analytics
-      </footer>
     </div>
   );
 }
