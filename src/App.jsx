@@ -603,105 +603,105 @@ export default function App() {
         <div className="grid gap-5 md:grid-cols-2">
           {filteredSections.length > 0 ? (
             filteredSections.map((section) => (
-             <section
-  key={section.title}
-  className={`overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:border-slate-300 max-w-full ${
-    section.isWide ? "md:col-span-2" : ""
-  }`}
->
-  {/* TOP SECTION */}
-  <div className="flex items-start gap-3 border-b border-slate-100 bg-slate-50 px-4 py-3">
-    {/* IMAGE */}
-    <div className="h-[80px] w-[95px] shrink-0 overflow-hidden rounded-xl bg-slate-200">
-      <img
-        src={section.image}
-        alt={section.title}
-        loading="lazy"
-        className="h-full w-full object-cover"
-      />
-    </div>
-
-    {/* TITLE + DESCRIPTION */}
-    <div className="flex-1">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div className="flex-1">
-          <h2 className="text-[18px] font-black tracking-tight text-slate-900">
-            <HighlightText
-              text={section.title}
-              query={debouncedQuery}
-            />
-          </h2>
-
-          <div className="mt-2 h-[3px] w-10 rounded-full bg-cyan-500" />
-
-          <p className="mt-2 text-[12px] leading-5 text-slate-500">
-            <HighlightText
-              text={section.description}
-              query={debouncedQuery}
-            />
-          </p>
-        </div>
-
-        <span
-          className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-bold uppercase tracking-wider ${
-            section.type === "Tableau"
-              ? "bg-blue-50 text-blue-700 ring-1 ring-blue-700/10"
-              : section.type === "QuickSight"
-                ? "bg-amber-50 text-amber-800 ring-1 ring-amber-600/10"
-                : "bg-purple-50 text-purple-700 ring-1 ring-purple-700/10"
-          }`}
-        >
-          {section.type}
-        </span>
-      </div>
-    </div>
-  </div>
-
-  {/* LINKS */}
-  <div className="p-3">
-    {section.groups.map((group) => {
-      const showHeader =
-        section.isWide || group.title !== "Dashboards";
-
-      return (
-        <div key={group.title} className="mb-4 last:mb-0">
-          {showHeader && (
-            <h4 className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">
-              {group.title}
-            </h4>
-          )}
-
-          <div
-            className={`grid gap-2 sm:grid-cols-2 ${
-              section.isWide ? "lg:grid-cols-3" : ""
-            }`}
-          >
-            {group.links.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/link flex items-center justify-between gap-2 rounded-lg border border-slate-200/80 bg-white px-3 py-2 transition-all duration-200 hover:border-teal-400 hover:bg-gradient-to-br hover:from-white hover:to-teal-50/20 hover:shadow-xs text-[12px] font-semibold text-slate-700 focus:outline-none"
+              <section
+                key={section.title}
+                className={`overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:border-slate-300 max-w-full ${
+                  section.isWide ? "md:col-span-2" : ""
+                }`}
               >
-                <span className="leading-tight min-w-0 transition-colors duration-200 group-hover/link:text-teal-600">
-                  <HighlightText
-                    text={link.name}
-                    query={debouncedQuery}
-                  />
-                </span>
+                {/* TOP SECTION */}
+                <div className="flex items-start gap-3 border-b border-slate-100 bg-slate-50 px-4 py-3">
+                  {/* IMAGE */}
+                  <div className="h-[80px] w-[95px] shrink-0 overflow-hidden rounded-xl bg-slate-200">
+                    <img
+                      src={section.image}
+                      alt={section.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
 
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-[10px] text-slate-500 font-bold border border-slate-100 shadow-3xs transition-all duration-200 group-hover/link:border-teal-500 group-hover/link:bg-teal-500 group-hover/link:text-white">
-                  🡥
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      );
-    })}
-  </div>
-</section>
+                  {/* TITLE + DESCRIPTION */}
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <h2 className="text-[18px] font-black tracking-tight text-slate-900">
+                          <HighlightText
+                            text={section.title}
+                            query={debouncedQuery}
+                          />
+                        </h2>
+
+                        <div className="mt-2 h-[3px] w-10 rounded-full bg-cyan-500" />
+
+                        <p className="mt-2 text-[12px] leading-5 text-slate-500">
+                          <HighlightText
+                            text={section.description}
+                            query={debouncedQuery}
+                          />
+                        </p>
+                      </div>
+
+                      <span
+                        className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-bold uppercase tracking-wider ${
+                          section.type === "Tableau"
+                            ? "bg-blue-50 text-blue-700 ring-1 ring-blue-700/10"
+                            : section.type === "QuickSight"
+                              ? "bg-amber-50 text-amber-800 ring-1 ring-amber-600/10"
+                              : "bg-purple-50 text-purple-700 ring-1 ring-purple-700/10"
+                        }`}
+                      >
+                        {section.type}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* LINKS */}
+                <div className="p-3">
+                  {section.groups.map((group) => {
+                    const showHeader =
+                      section.isWide || group.title !== "Dashboards";
+
+                    return (
+                      <div key={group.title} className="mb-4 last:mb-0">
+                        {showHeader && (
+                          <h4 className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">
+                            {group.title}
+                          </h4>
+                        )}
+
+                        <div
+                          className={`grid gap-2 sm:grid-cols-2 ${
+                            section.isWide ? "lg:grid-cols-3" : ""
+                          }`}
+                        >
+                          {group.links.map((link) => (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group/link flex items-center justify-between gap-2 rounded-lg border border-slate-200/80 bg-white px-3 py-2 transition-all duration-200 hover:border-teal-400 hover:bg-gradient-to-br hover:from-white hover:to-teal-50/20 hover:shadow-xs text-[12px] font-semibold text-slate-700 focus:outline-none"
+                            >
+                              <span className="leading-tight min-w-0 transition-colors duration-200 group-hover/link:text-teal-600">
+                                <HighlightText
+                                  text={link.name}
+                                  query={debouncedQuery}
+                                />
+                              </span>
+
+                              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-[10px] text-slate-500 font-bold border border-slate-100 shadow-3xs transition-all duration-200 group-hover/link:border-teal-500 group-hover/link:bg-teal-500 group-hover/link:text-white">
+                                🡥
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
             ))
           ) : (
             <div className="col-span-full py-20 text-center bg-white/40 rounded-3xl border-2 border-dashed border-slate-300 max-w-xl mx-auto w-full px-4">
