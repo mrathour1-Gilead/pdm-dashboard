@@ -227,7 +227,7 @@ const SECTIONS_DATA = [
           },
           {
             name: "API Lot Restriction V1",
-            url: "https://gtp.gilead.com/#/site/PDM/views/APIInventorywithExceptionHandling/InventorywEHD?:iid=1",
+            url: "https://gtp.gilead.com/#/site/PDM/views/APILOTRESTRICTION_v1/APILOTRestriction?:iid=2",
           },
           {
             name: "API Planning & Analytics Dashboards",
