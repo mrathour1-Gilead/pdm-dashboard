@@ -162,7 +162,7 @@ const SECTIONS_DATA = [
           },
           {
             name: "API Lot Restriction V1",
-            url: "https://gtp.gilead.com/#/site/PDM/views/APIInventorywithExceptionHandling/InventorywEHD?:iid=1",
+            url: "https://gtp.gilead.com/#/site/PDM/views/APILOTRESTRICTION_v1/APILOTRestriction?:iid=2",
           },
           {
             name: "API Planning & Analytics Dashboards",
@@ -178,7 +178,7 @@ const SECTIONS_DATA = [
           },
           {
             name: "Planning Strategy Dashboard",
-            url: "https://gtp.gilead.com/#/site/PDM/views/PlanningStrategyDashboard/PlanningStrategy?:iid=2%20",
+            url: "https://gtp.gilead.com/#/site/PDM/views/PlanningStrategyDashboard/PlanningStrategy?:iid=2",
           },
           {
             name: "Work Order Consumption Eligibility",
@@ -536,7 +536,7 @@ export default function App() {
           className="absolute inset-0 h-full w-full object-cover opacity-10 mix-blend-overlay"
         />
 
-        <div className="relative mx-auto max-w-[1920px] px-4 py-8 lg:px-8">
+        <div className="relative mx-auto max-w-[1500px] px-4 py-8 lg:px-6">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-4xl">
               <h1 className="text-4xl font-black tracking-tight text-white lg:text-5xl bg-gradient-to-r from-white via-white to-slate-300 bg-clip-text">
