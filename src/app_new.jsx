@@ -13,9 +13,11 @@ import rca from "./assets/images/rca.png";
 import gtms from "./assets/images/gtms.png";
 import seip from "./assets/images/seip.png";
 import inventory from "./assets/images/inventory.png";
+import tower from "./assets/images/tower.jpg";
 
 import header from "./assets/images/header.png";
 import abhishek from "./assets/images/abhishek.jpg";
+import { Link } from "react-router-dom";
 
 function HighlightText({ text, query }) {
   if (!query.trim()) return <span>{text}</span>;
@@ -536,6 +538,27 @@ const SECTIONS_DATA = [
       },
     ],
   },
+  {
+    category: "Deliver",
+    title: "Clinical Control Tower",
+    type: "Clinical",
+    image: tower,
+    description:
+      "A centralized platform that provides real-time visibility and coordination across the clinical supply chain.",
+
+    groups: [
+      {
+        title: "Dashboards",
+        links: [
+          {
+            name: "Clinical Control Tower",
+            internal: true,
+            url: "/clinical-control-tower",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 const categories = ["Planning", "Source", "Make", "Deliver"];
@@ -562,37 +585,39 @@ export default function App() {
 
     const query = debouncedSearch.toLowerCase();
 
-    return SECTIONS_DATA.filter(sec => sec.type === selectedMain).map((section) => {
-      const matchedGroups = section.groups
-        .map((group) => {
-          const filteredLinks = group.links.filter((link) =>
-            link.name.toLowerCase().includes(query),
-          );
+    return SECTIONS_DATA.filter((sec) => sec.type === selectedMain)
+      .map((section) => {
+        const matchedGroups = section.groups
+          .map((group) => {
+            const filteredLinks = group.links.filter((link) =>
+              link.name.toLowerCase().includes(query),
+            );
 
+            return {
+              ...group,
+              links: filteredLinks,
+            };
+          })
+          .filter((group) => group.links.length);
+
+        const matchesSection =
+          section.title.toLowerCase().includes(query) ||
+          section.description.toLowerCase().includes(query);
+
+        if (matchesSection || matchedGroups.length) {
           return {
-            ...group,
-            links: filteredLinks,
+            ...section,
+            groups: matchedGroups.length > 0 ? matchedGroups : section.groups,
           };
-        })
-        .filter((group) => group.links.length);
+        }
 
-      const matchesSection =
-        section.title.toLowerCase().includes(query) ||
-        section.description.toLowerCase().includes(query);
-
-      if (matchesSection || matchedGroups.length) {
-        return {
-          ...section,
-          groups: matchedGroups.length > 0 ? matchedGroups : section.groups,
-        };
-      }
-
-      return null;
-    }).filter(Boolean);
+        return null;
+      })
+      .filter(Boolean);
   }, [debouncedSearch]);
 
   const totalCount = useMemo(() => {
-    return SECTIONS_DATA.filter(sec => sec.type === selectedMain).reduce(
+    return SECTIONS_DATA.filter((sec) => sec.type === selectedMain).reduce(
       (acc, section) =>
         acc +
         section.groups.reduce((gAcc, group) => gAcc + group.links.length, 0),
@@ -601,13 +626,15 @@ export default function App() {
   }, [selectedMain]);
 
   const filteredCount = useMemo(() => {
-    return filteredData.filter(sec => sec.type === selectedMain).reduce(
-      (acc, section) =>
-        acc +
-        section.groups.reduce((gAcc, group) => gAcc + group.links.length, 0),
-      0,
-    );
-  }, [filteredData,selectedMain]);
+    return filteredData
+      .filter((sec) => sec.type === selectedMain)
+      .reduce(
+        (acc, section) =>
+          acc +
+          section.groups.reduce((gAcc, group) => gAcc + group.links.length, 0),
+        0,
+      );
+  }, [filteredData, selectedMain]);
 
   return (
     <div className="min-h-screen bg-[#f4f7fb]">
@@ -779,30 +806,50 @@ export default function App() {
                               )}
 
                               <div className="grid gap-2">
-                                {group.links.map((link) => (
-                                  <a
-                                    key={link.name}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 transition-all hover:border-slate-300 hover:bg-white"
-                                  >
-                                    <div className="flex items-center gap-2">
-                                      <span className="h-[5px] w-[5px] rounded-full bg-cyan-500" />
+                                {group.links.map((link) => {
+                                  const commonClass =
+                                    "group flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 transition-all hover:border-slate-300 hover:bg-white";
 
-                                      <span className="text-[11px] font-semibold text-slate-700">
-                                        <HighlightText
-                                          text={link.name}
-                                          query={debouncedSearch}
-                                        />
+                                  const content = (
+                                    <>
+                                      <div className="flex items-center gap-2">
+                                        <span className="h-[5px] w-[5px] rounded-full bg-cyan-500" />
+
+                                        <span className="text-[11px] font-semibold text-slate-700">
+                                          <HighlightText
+                                            text={link.name}
+                                            query={debouncedSearch}
+                                          />
+                                        </span>
+                                      </div>
+
+                                      <span className="text-[11px] text-slate-400">
+                                        ↗
                                       </span>
-                                    </div>
+                                    </>
+                                  );
 
-                                    <span className="text-[11px] text-slate-400">
-                                      ↗
-                                    </span>
-                                  </a>
-                                ))}
+                                  return link.internal ? (
+                                    <Link
+                                      key={link.name}
+                                      to={link.url}
+                                      target="_blank"
+                                      className={commonClass}
+                                    >
+                                      {content}
+                                    </Link>
+                                  ) : (
+                                    <a
+                                      key={link.name}
+                                      href={link.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className={commonClass}
+                                    >
+                                      {content}
+                                    </a>
+                                  );
+                                })}
                               </div>
                             </div>
                           ))}
